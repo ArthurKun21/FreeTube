@@ -1,4 +1,4 @@
-name: Build PR
+name: Build PR2
 
 on:
   pull_request_target:
