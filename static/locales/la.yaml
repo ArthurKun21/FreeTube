@@ -12,7 +12,7 @@ Copy: 'Effinge'
 Paste: 'Agglutina'
 Delete: 'Dele'
 Select all: 'Omnia selige'
-Toggle Developer Tools: 'Mutatio Constitutor Instrumenta'
+Toggle Developer Tools: 'Alterna Instrumenta Constitutoribus'
 Actual size: 'Vera magnitudine'
 Zoom in: 'Visum propius'
 Zoom out: 'Visi repostus'
@@ -36,6 +36,9 @@ Global:
   Counts:
     Video Count: 1 visio | {count} visiones
     Channel Count: 1 canalis | {count} canales
+    Subscriber Count: 1 subscriptor | {count} subscriptores
+    View Count: 1 spectator | {count} spectatores
+    Like Count: 1 amator | {count} amatores
 Search / Go to URL: 'Requiro / Adeo URL'
   # In Filter Button
 Search Filters:
