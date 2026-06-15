@@ -599,6 +599,7 @@ Settings:
     Show Family Friendly Only: Näita ainult peresõbralikku sisu
     Hide Search Bar: Peida otsinguriba
     Hide Uploader on Watch page: Peida üleslaadija videovaate lehelt
+    Disable Channel Links: Lülita kanalite lingid välja
   Experimental Settings:
     Experimental Settings: Katsed
     Warning: Tegemist on katseliste seadistustega ja sisselülitamisel võivad põhjustada rakenduse kokkujooksmist. Kindlasti ära unusta oma andmete varundamist. Jätka omal vastutusel!
