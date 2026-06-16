@@ -593,6 +593,7 @@ Settings:
     Show Family Friendly Only: ファミリー向けのみ表示
     Hide Unsubscribe Button: 登録解除ボタンの非表示
     Hide Uploader on Watch page: 視聴ページで投稿者情報を非表示
+    Disable Channel Links: チャンネルリンクを無効にする
   Experimental Settings:
     Replace HTTP Cache: HTTP キャッシュの置換
     Experimental Settings: 試験的
