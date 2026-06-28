@@ -2284,7 +2284,7 @@ export default defineComponent({
      * @param {KeyboardEvent} event
      */
     function keyboardShortcutHandler(event) {
-      if (!player || !hasLoaded.value) {
+      if (!player) {
         return
       }
 
@@ -2339,6 +2339,61 @@ export default defineComponent({
       }
 
       switch (event.key.toLowerCase()) {
+        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.FULLSCREEN:
+          // Toggle full screen
+          event.preventDefault()
+          ui.getControls().toggleFullScreen()
+          blurTooltipButtons()
+          break
+        case 'escape':
+          // Exit full window
+          if (fullWindowEnabled.value) {
+            event.preventDefault()
+
+            events.dispatchEvent(new CustomEvent('setFullWindow', {
+              detail: false
+            }))
+          }
+          break
+        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.FULLWINDOW:
+          // Toggle full window mode
+          event.preventDefault()
+          events.dispatchEvent(new CustomEvent('setFullWindow', {
+            detail: !fullWindowEnabled.value
+          }))
+          blurTooltipButtons()
+          break
+        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.THEATRE_MODE:
+          // Toggle theatre mode
+          if (props.theatrePossible) {
+            event.preventDefault()
+
+            events.dispatchEvent(new CustomEvent('toggleTheatreMode', {
+              detail: !props.useTheatreMode
+            }))
+          }
+          blurTooltipButtons()
+          break
+        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.MUTE:
+          // Toggle mute only if metakey is not pressed
+          if (!event.metaKey) {
+            event.preventDefault()
+            const isMuted = !video_.muted
+            video_.muted = isMuted
+
+            const messageIcon = isMuted ? 'volume-mute' : 'volume-high'
+            const message = isMuted ? '0%' : `${Math.round(video_.volume * 100)}%`
+            showValueChange(message, messageIcon)
+          }
+          blurTooltipButtons()
+          break
+      }
+
+      if (!hasLoaded.value) {
+        return
+      }
+
+      switch (event.key.toLowerCase()) {
         case ' ':
         case 'spacebar': // older browsers might return spacebar instead of a space character
         case KeyboardShortcuts.VIDEO_PLAYER.PLAYBACK.PLAY:
@@ -2368,25 +2423,6 @@ export default defineComponent({
           // Increase playback rate by user configured interval
           event.preventDefault()
           changePlayBackRate(videoPlaybackRateInterval.value)
-          break
-        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.FULLSCREEN:
-          // Toggle full screen
-          event.preventDefault()
-          ui.getControls().toggleFullScreen()
-          blurTooltipButtons()
-          break
-        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.MUTE:
-          // Toggle mute only if metakey is not pressed
-          if (!event.metaKey) {
-            event.preventDefault()
-            const isMuted = !video_.muted
-            video_.muted = isMuted
-
-            const messageIcon = isMuted ? 'volume-mute' : 'volume-high'
-            const message = isMuted ? '0%' : `${Math.round(video_.volume * 100)}%`
-            showValueChange(message, messageIcon)
-          }
-          blurTooltipButtons()
           break
         case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.CAPTIONS: {
           // Toggle caption/subtitles
@@ -2520,35 +2556,6 @@ export default defineComponent({
             video_.currentTime = seekRange.end
             showOverlayControls()
           }
-          break
-        case 'escape':
-          // Exit full window
-          if (fullWindowEnabled.value) {
-            event.preventDefault()
-
-            events.dispatchEvent(new CustomEvent('setFullWindow', {
-              detail: false
-            }))
-          }
-          break
-        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.FULLWINDOW:
-          // Toggle full window mode
-          event.preventDefault()
-          events.dispatchEvent(new CustomEvent('setFullWindow', {
-            detail: !fullWindowEnabled.value
-          }))
-          blurTooltipButtons()
-          break
-        case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.THEATRE_MODE:
-          // Toggle theatre mode
-          if (props.theatrePossible) {
-            event.preventDefault()
-
-            events.dispatchEvent(new CustomEvent('toggleTheatreMode', {
-              detail: !props.useTheatreMode
-            }))
-          }
-          blurTooltipButtons()
           break
         case KeyboardShortcuts.VIDEO_PLAYER.GENERAL.TAKE_SCREENSHOT:
           if (enableScreenshot.value && props.format !== 'audio') {
